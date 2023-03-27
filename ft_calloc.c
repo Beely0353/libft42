@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: baroun <baroun@student.42.fr>              +#+  +:+       +#+        */
+/*   By: biaroun <biaroun@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 14:23:01 by baroun            #+#    #+#             */
-/*   Updated: 2021/10/27 15:51:41 by baroun           ###   ########.fr       */
+/*   Updated: 2023/03/27 09:49:36 by biaroun          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,7 @@ void	*ft_calloc(size_t count, size_t size)
 
 	dst = malloc(count * size);
 	if (!dst)
-	{
-		errno = ENOMEM;
 		return (NULL);
-	}
 	ft_bzero(dst, count * size);
 	return (dst);
 }

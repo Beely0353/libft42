@@ -3,58 +3,75 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: baroun <baroun@student.42.fr>              +#+  +:+       +#+        */
+/*   By: biaroun <biaroun@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 15:43:43 by baroun            #+#    #+#             */
-/*   Updated: 2021/11/04 17:39:34 by baroun           ###   ########.fr       */
+/*   Updated: 2023/03/27 09:37:09 by biaroun          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
-static size_t	cpt_sep(const char *s, char c)
+int	count_word(const char *str, char c)
 {
-	size_t	i;
+	int	i;
+	int	j;
 
 	i = 0;
-	while (*s)
+	j = 0;
+	while (str[i])
 	{
-		if (*s != c)
+		if (str[i] != c)
 		{
-			i++;
-			while (*s && *s != c)
-				s++;
+			j++;
+			while (str[i] != c && str[i])
+				i++;
+			continue ;
 		}
-		else
-			s++;
+		i++;
 	}
-	return (i);
+	return (j);
+}
+
+char	*setline(const char *str, int *i, char c)
+{
+	char	*r;
+	int		j;
+
+	j = *i;
+	while (str[*i] != c && str[j])
+		j++;
+	r = malloc(sizeof(char) * (j - *i + 1));
+	if (!r)
+		return (0);
+	j = 0;
+	while (str[*i] != c && str[*i])
+		r[j++] = str[(*i)++];
+	r[j] = '\0';
+	return (r);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	size_t		len;
-	size_t		i;
-	const char	*start;
-	char		**split;
+	int		i;
+	int		j;
+	char	**r;
 
 	i = 0;
-	if (!s)
-		return (NULL);
-	split = (char **)malloc(((cpt_sep(s, c)) + 1) * sizeof(char *));
-	if (!split)
-		return (NULL);
-	while (*s)
+	j = 0;
+	r = malloc(sizeof(char *) * count_word(s, c) + 1);
+	if (!r)
+		return (0);
+	while (s[i])
 	{
-		while (*s && *s == c)
-			s++;
-		start = s;
-		len = 0;
-		while (*s && *s != c && (int)len++ != -1)
-			s++;
-		if (*(s - 1) != c)
-			split[i++] = ft_substr(start, 0, len);
+		if (s[i] != c)
+		{
+			r[j++] = setline(s, &i, c);
+			continue ;
+		}
+		i++;
 	}
-	split[i] = 0;
-	return (split);
+	r[j] = 0;
+	return (r);
 }

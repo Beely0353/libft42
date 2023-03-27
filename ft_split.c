@@ -6,7 +6,7 @@
 /*   By: biaroun <biaroun@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 15:43:43 by baroun            #+#    #+#             */
-/*   Updated: 2023/03/27 09:37:09 by biaroun          ###   ########.fr       */
+/*   Updated: 2023/03/27 12:13:12 by biaroun          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	*setline(const char *str, int *i, char c)
 		j++;
 	r = malloc(sizeof(char) * (j - *i + 1));
 	if (!r)
-		return (0);
+		return (NULL);
 	j = 0;
 	while (str[*i] != c && str[*i])
 		r[j++] = str[(*i)++];
@@ -58,11 +58,13 @@ char	**ft_split(char const *s, char c)
 	int		j;
 	char	**r;
 
+	if (!s)
+		return (NULL);
 	i = 0;
 	j = 0;
 	r = malloc(sizeof(char *) * count_word(s, c) + 1);
 	if (!r)
-		return (0);
+		return (NULL);
 	while (s[i])
 	{
 		if (s[i] != c)

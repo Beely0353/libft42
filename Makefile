@@ -35,18 +35,10 @@ bonus: $(OBJS_B)
 			@printf "\033[K📚 Archivage des ""$(GRE)bonus$(EOC). 📚"
 			@ar crs $(NAME) $(OBJS_B)
 
-CHARS = 🕛 🕐 🕑 🕒 🕓 🕔 🕕 🕖 🕗 🕘 🕙 🕚
-
 .c.o:
-	@printf "Compilation en cours : "
-	@i=0; \
-	while [ $$i -lt 12 ]; do \
-	    printf "\033[1D🕛 \033[33m%-2s\033[0m" "$$i"; \
-	    sleep 0.1; \
-	    i=$$((i+1)); \
-	done
+	@clear
+	@printf "\r\033[K⏳ Compilation de ""$(YEL)${notdir $<}$(EOC). ⏳"
 	@gcc -Werror -Wextra -Wall -c $< -o $(<:.c=.o)
-	@printf "\033[1D\033[KCompilation de \033[32m$<\033[0m terminée\n"
 
 
 clean:

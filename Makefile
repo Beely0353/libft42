@@ -1,3 +1,9 @@
+RED		=	\033[31m
+GRE		=	\033[32m
+BLU		=	\033[34m
+YEL		=	\033[33m
+EOC		=	\033[0m
+
 SRCS =	ft_atoi.c ft_itoa.c \
 		ft_tolower.c ft_toupper.c \
 		ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c ft_isprint.c \
@@ -20,19 +26,36 @@ NAME = libft.a
 all: $(NAME)
 
 $(NAME): $(OBJS)
-			ar crs $(NAME) $(OBJS)
+			@clear
+			@printf "\033[K📚 Archivage de la ""$(GRE)libft$(EOC). 📚"
+			@ar crs $(NAME) $(OBJS)
 
 bonus: $(OBJS_B)
-			ar crs $(NAME) $(OBJS_B)
+			@clear
+			@printf "\033[K📚 Archivage des ""$(GRE)bonus$(EOC). 📚"
+			@ar crs $(NAME) $(OBJS_B)
+
+CHARS = 🕛 🕐 🕑 🕒 🕓 🕔 🕕 🕖 🕗 🕘 🕙 🕚
 
 .c.o:
-	gcc -Werror -Wextra -Wall -c $< -o $(<:.c=.o)
+	@printf "Compilation en cours : "
+	@i=0; \
+	while [ $$i -lt 12 ]; do \
+	    printf "\033[1D🕛 \033[33m%-2s\033[0m" "$$i"; \
+	    sleep 0.1; \
+	    i=$$((i+1)); \
+	done
+	@gcc -Werror -Wextra -Wall -c $< -o $(<:.c=.o)
+	@printf "\033[1D\033[KCompilation de \033[32m$<\033[0m terminée\n"
+
 
 clean:
-	rm -rf $(OBJS) $(OBJS_B)
+	@echo "🗑  $(RED)Supression des fichiers binaires (.o).$(EOC) 🗑"
+	@rm -rf $(OBJS) $(OBJS_B)
 
 fclean: clean
-	rm -rf $(NAME)
+	@echo "🗑  $(RED)Supression des executables et librairies.$(EOC) 🗑"
+	@rm -rf $(NAME)
 
 re: 	fclean all
 

@@ -6,7 +6,7 @@
 /*   By: biaroun <biaroun@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 15:43:43 by baroun            #+#    #+#             */
-/*   Updated: 2023/03/27 12:13:12 by biaroun          ###   ########.fr       */
+/*   Updated: 2023/03/27 15:54:05 by biaroun          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ char	**ft_split(char const *s, char c)
 		return (NULL);
 	i = 0;
 	j = 0;
-	r = malloc(sizeof(char *) * count_word(s, c) + 1);
+	r = malloc(sizeof(char *) * (count_word(s, c) + 1));
 	if (!r)
 		return (NULL);
 	while (s[i])
